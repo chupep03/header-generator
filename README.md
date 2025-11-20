@@ -22,9 +22,8 @@
 ## Архитектура
 ```mermaid
 flowchart TD
-    Start[Запуск плагина] --> Command[Ctrl+Shift+P<br>Generate Header]
     Command --> Analyze[Анализ C++ файла]
-    Analyze --> Extract[Извлечение данных]
+    Analyze --> Extract[Парсинг и извлечение]
     
     Extract --> Functions[Функции]
     Extract --> Classes[Классы]
