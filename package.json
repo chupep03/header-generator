@@ -1,0 +1,23 @@
+{
+  "name": "code-generator-lab3",
+  "displayName": "C++ Header Generator",
+  "description": "Анализирует C++ код и генерирует заголовочные файлы",
+  "version": "0.0.1",
+  "engines": { "vscode": "^1.74.0" },
+  "categories": [ "Other" ],
+  "activationEvents": [
+    "onCommand:code-generator.analyzeAndGenerateHeader"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "code-generator.analyzeAndGenerateHeader",
+        "title": "Generate C++ Header from Code"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "echo 'Компиляция не требуется'"
+  }
+}
