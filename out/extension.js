@@ -155,17 +155,17 @@ async function saveHeaderFile(originalFilePath, headerContent) {
         
         await vscode.window.showTextDocument(document);
         
-        const saveOption = await vscode.window.showInformationMessage(
+        const saveOrNot = await vscode.window.showInformationMessage(
             'Header generated! Save file?',
             'Save',
             'Save As...',
             'Cancel'
         );
         
-        if (saveOption === 'Save') {
+        if (saveOrNot === 'Save') {
             await document.save();
             vscode.window.showInformationMessage(`Header saved to ${headerPath}`);
-        } else if (saveOption === 'Save As...') {
+        } else if (saveOrNot === 'Save As...') {
             const uri = await vscode.window.showSaveDialog({
                 defaultUri: vscode.Uri.file(headerPath),
                 filters: {

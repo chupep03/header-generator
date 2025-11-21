@@ -154,7 +154,31 @@ async function saveHeaderFile(originalFilePath, headerContent) {
         });
         
         await vscode.window.showTextDocument(document);
-        vscode.window.showInformationMessage(`Header generated for ${path.basename(originalFilePath)}`);
+        
+        const saveOrNot = await vscode.window.showInformationMessage(
+            'Header generated! Save file?',
+            'Save',
+            'Save As...',
+            'Cancel'
+        );
+        
+        if (saveOrNot === 'Save') {
+            await document.save();
+            vscode.window.showInformationMessage(`Header saved to ${headerPath}`);
+        } else if (saveOrNot === 'Save As...') {
+            const uri = await vscode.window.showSaveDialog({
+                defaultUri: vscode.Uri.file(headerPath),
+                filters: {
+                    'Header Files': ['h', 'hpp'],
+                    'All Files': ['*']
+                }
+            });
+            
+            if (uri) {
+                fs.writeFileSync(uri.fsPath, headerContent);
+                vscode.window.showInformationMessage(`Header saved to ${uri.fsPath}`);
+            }
+        }
         
     } catch (error) {
         vscode.window.showErrorMessage(`Save error: ${error.message}`);
